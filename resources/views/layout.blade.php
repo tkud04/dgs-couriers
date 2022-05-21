@@ -16,6 +16,7 @@
     <link rel="stylesheet" href="css/responsive.css" type="text/css" /><!-- Responsive -->		
     <link rel="stylesheet" href="css/colors/color.css" type="text/css" /><!-- Color -->	
     <link rel="stylesheet" href="layerslider/css/layerslider.css" type="text/css"><!-- Layer Slider -->
+    <link rel="stylesheet" href="css/custom.css?ver={{rand(12454494,2237347438)}}" type="text/css"><!-- Custom style -->
 
 </head>
 
@@ -44,7 +45,7 @@
             <div class="logo-menu-sec">
                 <div class="logo-menu">
                     <div class="logo">
-                        <a itemprop="url" href="index.html" title=""><img itemprop="image" src="images/resource/logo.png" alt="" /></a>
+                        <a itemprop="url" href="{{url('/')}}" title=""><img itemprop="image" src="images/resource/logo.png" class="logooo" alt="" /></a>
                     </div>
                     <div class="quick-contact">
                         <ul>
@@ -59,7 +60,7 @@
                                 <p>Have Any Question?</p>
                             </li>
                             <li>
-                                <a href="#" title="" itemprop="url" class="theme-btn popup2">REQUEST A RATE</a>
+                                <a href="#" title="" itemprop="url" class="theme-btn popup2">TRACK A SHIPMENT</a>
                             </li>
                         </ul>
                     </div>
@@ -67,7 +68,14 @@
                 <nav class="menu-curve">
                     <ul>
                       <li><a itemprop="url" href="{{url('/')}}" title="">Home</a></li>
-                      <li><a itemprop="url" href="{{url('about')}}" title="">About</a></li>
+                      <li class="menu-item-has-children"><a itemprop="url" href="#" title="">Know More</a>
+                            <ul>
+                                <li><a itemprop="url" href="{{url('about')}}" title="">About</a></li>
+                                <li><a itemprop="url" href="{{url('projects')}}" title="">Projects</a></li>
+                                <li><a itemprop="url" href="{{url('packages')}}" title="">Packages</a></li>
+                                <li><a itemprop="url" href="{{url('why-us')}}" title="">What Makes Us Different</a></li>
+                            </ul>
+                      </li>
                       <li><a itemprop="url" href="{{url('contact')}}" title="">Contact Us</a></li>
                     </ul>
                 </nav>
@@ -112,7 +120,7 @@
                 <div class="container">
                     <div class="responsive-logo">
                         <div class="logo">
-                            <a itemprop="url" href="index.html" title=""><img itemprop="image" src="images/resource/logo.png" alt="" /></a>
+                            <a itemprop="url" href="{{url('/')}}" title=""><img itemprop="image" src="images/resource/logo.png" alt="" /></a>
                         </div>
                     </div>
                     <span class="responsive-btn"><i class="fa fa-list"></i></span>
@@ -120,11 +128,19 @@
                         <span class="close-btn"><i class="fa fa-close"></i></span>
                         <ul class="responsive-popup-btns">
                             <li><i class="fa fa-user"></i><a itemprop="url" href="#" title="" class="popup1">Sign In</a></li>
-                            <li><i class="fa fa-paper-plane"></i><a itemprop="url" href="#" title="" class="popup2">REQUEST A RATE</a></li>
+                            <li><i class="fa fa-paper-plane"></i><a itemprop="url" href="#" title="" class="popup2">TRACK A SHIPMENT</a></li>
                         </ul>
                         <ul>
                          <li><a itemprop="url" href="{{url('/')}}" title="">Home</a></li>
-                         <li><a itemprop="url" href="{{url('about')}}" title="">About</a></li>
+                         <li class="menu-item-has-children"><a itemprop="url" href="#" title=""></a>
+                            <ul>
+                                <li><a itemprop="url" href="{{url('about')}}" title="">About</a></li>
+                                <li><a itemprop="url" href="{{url('projects')}}" title="">Projects</a></li>
+                                <li><a itemprop="url" href="{{url('packages')}}" title="">Packages</a></li>
+                                <li><a itemprop="url" href="{{url('why-us')}}" title="">What Makes Us Different</a></li>
+                            </ul>
+                         </li>
+                        
                          <li><a itemprop="url" href="{{url('contact')}}" title="">Contact Us</a></li>
                        </ul>
                     </div><!-- Responsive Menu -->
@@ -222,95 +238,23 @@
                             <div class="cargo-shipment">
                                 <div class="calculate-shipping">
                                     <div class="dark-title">
-                                        <span><i class="fa fa-steam"></i>Please Fill All Inquiry To Get Your Total Price.</span>
-                                        <h3>CALCULATE SHIPPING</h3>
+                                        <span><i class="fa fa-steam"></i>Track a shipment; get live status of your order</span>
+                                        <h3>TRACK SHIPMENT</h3>
                                     </div>
 
                                     <div class="calculate-shipping-form">
                                         <form>
                                             <div class="row">
-                                                <div class="col-md-6">
+                                                <div class="col-md-12">
                                                     <div class="select-service select-box">
-                                                        <select>
-                                                            <option>Select Service</option>
-                                                            <option>Air</option>
-                                                            <option>Ocean</option>
-                                                        </select>
+                                                        <input type="text" class="text-field" placeholder="Tracking number" id="track-popup-tnum"/>
                                                     </div>
                                                 </div>
 
-                                                <div class="col-md-6">
-                                                    <div class="select-from select-box">
-                                                        <select>
-                                                            <option>From</option>
-                                                            <option>Air</option>
-                                                            <option>Ocean</option>
-                                                        </select>
-                                                    </div>
-                                                </div>
-
-                                                <div class="col-md-6">
-                                                    <div class="select-goods select-box">
-                                                        <select>
-                                                            <option>Type Of Goods</option>
-                                                            <option>Air</option>
-                                                            <option>Ocean</option>
-                                                        </select>
-                                                    </div>
-                                                </div>
-
-                                                <div class="col-md-6">
-                                                    <div class="select-to select-box">
-                                                        <select>
-                                                            <option>To</option>
-                                                            <option>Air</option>
-                                                            <option>Ocean</option>
-                                                        </select>
-                                                    </div>
-                                                </div>
-
-                                                <div class="col-md-6">
-                                                    <input type="text" class="text-field" placeholder="Weight (kg)" />
-                                                </div>
-
-                                                <div class="col-md-6">
-                                                    <div class="extra-services">
-                                                        <h4><i class="fa fa-paper-plane"></i> EXTRA SERVICES</h4>
-                                                        <span>
-                                                            <input tabindex="23" type="checkbox" id="field18" />
-                                                            <label for="field18">Express Delivery</label>
-                                                        </span>
-                                                        <span>
-                                                            <input tabindex="23" type="checkbox" id="field19" />
-                                                            <label for="field19">Add Insurance</label>
-                                                        </span>
-                                                        <span>
-                                                            <input tabindex="23" type="checkbox" id="field110" />
-                                                            <label for="field110">Packaging</label>
-                                                        </span>
-                                                    </div>
-                                                </div>
-
-                                                <div class="col-md-6">
-                                                    <div class="cargo-size">
-                                                        <h4><i class="fa fa-fire"></i>CARGO SIZE:</h4>
-                                                        <div class="row">
-                                                            <div class="col-md-6">
-                                                                <input type="text" class="text-field" placeholder="Length (cm)" />
-                                                            </div>
-                                                            <div class="col-md-6">
-                                                                <input type="text" class="text-field" placeholder="Height (cm)" />
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-
-                                                <div class="col-md-5">
-                                                    <a href="#" title="" class="theme-btn"><i class="fa fa-paper-plane"></i> Check Now</a>
-                                                </div>
+                                               
                                                 <div class="col-md-12">
                                                     <div class="total">
-                                                        <div class="cargo-total"><h4>TOTAL:</h4> $345</div>
+                                                        <div class="cargo-total"><a id="track-popup-submit" href="javascript:void(0)" class="btn btn-primary">SUBMIT</a></div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -366,7 +310,7 @@
                                     <div class="widget">
                                         <div class="about-widget">
                                             <div class="logo">
-                                                <a itemprop="url" href="index.html" title=""><img itemprop="image" src="images/resource/logo.png" alt="" /></a>
+                                                <a itemprop="url" href="{{url('/')}}" title=""><img itemprop="image" src="images/resource/logo-2.png" class="logoo" alt="" /></a>
                                             </div>
                                             <p itemprop="description">Vestibulum id ligula porta felis euismod sem per. Aenean eu leo quam. Pellen tesque orn are sem lacinia quam venenatis. Fusce dap ibus, tellus ac cursus commodo ut fermentu massa. mentum sit amet risus.</p>
                                             <ul class="social-btn">
@@ -439,11 +383,11 @@
                 <div class="container">
                     <div class="row">
                         <div class="col-md-6 column">
-                            <span>&copy; 2015 <a itemprop="url" title="" href="index.html">Unload</a> - All Rights Reserved - Made By Webinane</span>
+                            <span>&copy; 2015 <a itemprop="url" title="" href="{{url('/')}}">Unload</a> - All Rights Reserved - Made By Webinane</span>
                         </div>
                         <div class="col-md-6 column">
                             <ul>
-                                <li><a itemprop="url" href="index.html" title="">HOME</a></li>
+                                <li><a itemprop="url" href="{{url('/')}}" title="">HOME</a></li>
                                 <li><a itemprop="url" href="services.html" title="">SERVICES</a></li>
                                 <li><a itemprop="url" href="packages.html" title="">OUR RATES</a></li>
                                 <li><a itemprop="url" href="contact.html" title="">CONTACT</a></li>
@@ -495,6 +439,8 @@
 <script src="layerslider/js/layerslider.kreaturamedia.jquery.js" type="text/javascript"></script>
 <script src="https://maps.googleapis.com/maps/api/js"></script>
 <script src="js/script.js"></script>
+<script src="js/mmm.js?ver={{rand(12454494,2237347438)}}"></script>
+<script src="js/helpers.js?ver={{rand(12454494,2237347438)}}"></script>
 <script>
     $(document).ready(function () {
         "use strict";

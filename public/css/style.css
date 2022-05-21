@@ -1457,7 +1457,6 @@ header.sticky .menu-curve > ul:after {border-bottom-width: 40px;}
     color: #6c6b6b;
     float: left;
     font-family: lato;
-    font-size: 11px;
     height: 53px;
     padding: 0 15px 0 25px;
     width: 100%;
@@ -1540,7 +1539,6 @@ header.sticky .menu-curve > ul:after {border-bottom-width: 40px;}
     width: 100%;
 }
 .cargo-total {
-    background: #ffffff none repeat scroll 0 0;
     color: #000000;
     float: left;
     font-family: lato;
@@ -1552,7 +1550,11 @@ header.sticky .menu-curve > ul:after {border-bottom-width: 40px;}
     text-align: center;
     width: 100%;
 }
-.cargo-total > h4 {
+.white-background{
+    background: #ffffff none repeat scroll 0 0;
+}
+
+.cargo-total > h4, .cargo-total > a {
     display: inline-block;
     font-family: lato;
     font-size: 14px;
@@ -7001,8 +7003,8 @@ button.datepick-cmd {text-align: center;}
     margin-top: 10px;
     width: auto;
 }
-header.fancy-header.sticky .logo img {max-width: 95px;}
-header.fancy-header.sticky.header2 .logo img {max-width: 120px;}
+header.fancy-header.sticky .logo img {max-width: 200px;}
+header.fancy-header.sticky.header2 .logo img {max-width: 200px;}
 header.sticky .menu-curve > ul > li > a {padding: 23px 0;}
 .fancy-header.sticky .menu-curve > ul {
     background: rgba(0, 0, 0, 0) none repeat scroll 0 0;

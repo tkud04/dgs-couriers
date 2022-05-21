@@ -4,7 +4,7 @@ namespace App\Models;
  
 use Illuminate\Database\Eloquent\Model;
  
-class Topics extends Model
+class Receivers extends Model
 {
      /**
      * The attributes that are mass assignable.
@@ -12,9 +12,9 @@ class Topics extends Model
      * @var array<int, string>
      */
     protected $fillable = [
-        'subject_id',
+        'tnum',
         'name',
-        'type',
-        'content'
+        'phone',
+        'address'
     ];
 }
