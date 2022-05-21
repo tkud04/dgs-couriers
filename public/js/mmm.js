@@ -1,5 +1,7 @@
 $(document).ready(() => {
-    $('#signup-submit').click(e => {
+  hideElem(['#track-popup-tnum-error']);
+
+  $('#signup-submit').click(e => {
         e.preventDefault();
         let fname = $('#signup-fname').val(), lname = $('#signup-lname').val(), 
         email = $('#signup-email').val(), role = $('#signup-role').val(), 
@@ -25,6 +27,19 @@ $(document).ready(() => {
         else{
             $('#login-form').submit();
         }
+    });
+
+    $('#track-popup-submit').click(e => {
+      e.preventDefault();
+      hideElem('#track-popup-tnum-error');
+      let tnum = $('#track-popup-tnum').val();
+
+      if(tnum == ""){
+        showElem('#track-popup-tnum-error');
+      }
+      else{
+        window.location = `track?num=${tnum}`;
+      }
     });
 });
 

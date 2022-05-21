@@ -256,6 +256,7 @@
                                                     <div class="total">
                                                         <div class="cargo-total"><a id="track-popup-submit" href="javascript:void(0)" class="btn btn-primary">SUBMIT</a></div>
                                                     </div>
+                                                    <p id="track-popup-tnum-error" class="text-danger text-bold">This field is required</p>
                                                 </div>
                                             </div>
                                         </form>
