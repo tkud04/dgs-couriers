@@ -59,16 +59,34 @@ class MainController extends Controller {
 		}
 
 		$req = $request->all();
+        $t = []; $valid = false;
 
         if(isset($req['num'])){
            $t = $this->helpers->track($req['num']);
         }
-        else{
-            return redirect()->intended('classes');
-        }
-		$signals = $this->helpers->signals;
-        #dd($user);
-    	return view('edit-class',compact(['user','c','signals']));
+        $signals = $this->helpers->signals;
+       
+		if(count($t['tracking']) > 0) $false = true;
+    	return view('track',compact(['user','t','valid','signals']));
+    }
+
+
+	 /**
+	 * Show the application contact view to the user.
+	 *
+	 * @return Response
+	 */
+	public function getContact(Request $request)
+    {
+       $user = null;
+	   $signals = $this->helpers->signals;
+
+		if(Auth::check())
+		{
+			$user = Auth::user();
+		}
+
+    	return view('contact',compact(['user','signals']));
     }
 	
 	

@@ -41,6 +41,21 @@ $(document).ready(() => {
         window.location = `track?num=${tnum}`;
       }
     });
+
+    $('#quote-btn').click(e => {
+      e.preventDefault();
+     // hideElem('#track-popup-tnum-error');
+      let name = $('#name').val(),  email = $('#email').val()
+      subject = $('#subject').val(),  description = $('#description').val();
+
+      if(name == "" || email == "" || subject == "" || description == ""){
+        //showElem('#track-popup-tnum-error');
+        alert("Please fill allrequired fields");
+      }
+      else{
+        //window.location = `track?num=${tnum}`;
+      }
+    });
 });
 
 function removeStudent(c,s){

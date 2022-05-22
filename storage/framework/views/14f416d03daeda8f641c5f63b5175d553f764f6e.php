@@ -1,8 +1,8 @@
-@extends('layout')
 
-@section('title',"Contact Us")
 
-@section('content')
+<?php $__env->startSection('title',"Contact Us"); ?>
+
+<?php $__env->startSection('content'); ?>
 <section class="block remove-top">
             <div class="container">
                 <div class="row">
@@ -44,8 +44,9 @@
                                         <p>Fill The Form Bellow. And Get In Touch Immeditily</p>
                                         <div class="contactform">
                                             <div id="message"></div>
-                                            <form id="contactform" method="post" action="{{url('contact')}}">
-                                                {!! csrf_field() !!}
+                                            <form id="contactform" method="post" action="<?php echo e(url('contact')); ?>">
+                                                <?php echo csrf_field(); ?>
+
                                                 <div class="row">
                                                     <div class="col-md-12">
                                                         <input type="text" placeholder="Complete Name" class="text-field input-style" id="name" name="name">
@@ -75,4 +76,5 @@
                 </div>
             </div>
         </section>
-@stop
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('layout', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\repos\dgs-couriers\resources\views/contact.blade.php ENDPATH**/ ?>
