@@ -14,7 +14,7 @@
 
   <script>
     Swal.fire({
-      icon: "{{$icon}}",
-      title: "{{$signal[$pop]}}"
+      icon: "<?php echo e($icon); ?>",
+      title: "<?php echo e($signal[$pop]); ?>"
     });
-  </script>
+  </script><?php /**PATH C:\repos\dgs-couriers\resources\views/session-status.blade.php ENDPATH**/ ?>

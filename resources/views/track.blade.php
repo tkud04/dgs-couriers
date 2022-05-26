@@ -10,7 +10,7 @@ $void = 'javascript:void(0)';
 if($valid)
 {
 ?>
- @include('tracking-found',['t' => $t])
+ @include('tracking-found',['result' => $result])
 <?php
 }
 

@@ -35,10 +35,9 @@ class MainController extends Controller {
 
 		
 		$signals = $this->helpers->signals;
-        //$courses = $this->helpers->getClasses();
+        $plugins = $this->helpers->getPlugins();
         $courses = [];
-        #dd($user);
-    	return view('index',compact(['user','courses','signals']));
+        return view('index',compact(['user','plugins','signals','plugins']));
     }
 	
 
@@ -59,15 +58,16 @@ class MainController extends Controller {
 		}
 
 		$req = $request->all();
-        $t = []; $valid = false;
+        $result = []; $valid = false;
 
-        if(isset($req['num'])){
-           $t = $this->helpers->track($req['num']);
+        if(isset($req['tnum'])){
+           $result = $this->helpers->track($req['tnum'],['mode' => "all"]);
         }
         $signals = $this->helpers->signals;
-       
-		if(count($t['tracking']) > 0) $false = true;
-    	return view('track',compact(['user','t','valid','signals']));
+		$plugins = $this->helpers->getPlugins();
+        #dd($result);
+		if(!isset($result['tracking']) || count($result['tracking']) > 0) $valid = true;
+    	return view('track',compact(['user','result','valid','signals','plugins']));
     }
 
 
@@ -80,15 +80,53 @@ class MainController extends Controller {
     {
        $user = null;
 	   $signals = $this->helpers->signals;
+	   $plugins = $this->helpers->getPlugins();
 
 		if(Auth::check())
 		{
 			$user = Auth::user();
 		}
 
-    	return view('contact',compact(['user','signals']));
+    	return view('contact',compact(['user','signals','plugins']));
     }
-	
+
+	 /**
+	 * Show the application about view to the user.
+	 *
+	 * @return Response
+	 */
+	public function getAbout(Request $request)
+    {
+       $user = null;
+	   $signals = $this->helpers->signals;
+	   $plugins = $this->helpers->getPlugins();
+
+		if(Auth::check())
+		{
+			$user = Auth::user();
+		}
+
+    	return view('about',compact(['user','signals','plugins']));
+    }
+
+	 /**
+	 * Show the application about view to the user.
+	 *
+	 * @return Response
+	 */
+	public function getWhyUs(Request $request)
+    {
+       $user = null;
+	   $signals = $this->helpers->signals;
+	   $plugins = $this->helpers->getPlugins();
+
+		if(Auth::check())
+		{
+			$user = Auth::user();
+		}
+
+    	return view('why-us',compact(['user','signals','plugins']));
+    }
 	
 	
     

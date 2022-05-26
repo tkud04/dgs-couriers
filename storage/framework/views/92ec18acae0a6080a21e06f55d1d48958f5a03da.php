@@ -1,3 +1,6 @@
+<?php
+$void = "javascript:void(0)";
+?>
 <!DOCTYPE html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -7,7 +10,7 @@
     <meta name="keywords" content="" />
 
     <!-- Styles -->
-    <link rel="stylesheet" href="css/bootstrap.css" type="text/css" /><!-- Bootstrap -->
+    <link rel="stylesheet" href="css/bootstrap.min.css" type="text/css" /><!-- Bootstrap -->
     <link rel="stylesheet" href="css/owl.carousel.css" type="text/css" /><!-- Owl Carousal -->	
     <link rel="stylesheet" href="css/icons.css" type="text/css" /><!-- Font Awesome -->
     <link rel="stylesheet" href="css/select2.min.css" type="text/css" /><!-- Select2 -->
@@ -17,6 +20,12 @@
     <link rel="stylesheet" href="css/colors/color.css" type="text/css" /><!-- Color -->	
     <link rel="stylesheet" href="layerslider/css/layerslider.css" type="text/css"><!-- Layer Slider -->
     <link rel="stylesheet" href="css/custom.css?ver=<?php echo e(rand(12454494,2237347438)); ?>" type="text/css"><!-- Custom style -->
+
+    <!--SweetAlert CSS--> 
+    <link href="lib/sweet-alert/sweetalert2.css" rel="stylesheet">
+
+    <!--Datatables CSS--> 
+    <link href="lib/datatables/datatables.min.css" rel="stylesheet">
 
 </head>
 
@@ -37,7 +46,12 @@
                             </ul>
                         </div>
                         <div class="extra-links">
-                            <a itemprop="url" href="#" title="">Support</a>   /   <a itemprop="url" href="#" title="" class="popup1">Sign In</a>
+                            <a itemprop="url" href="#" title="">Support</a>   /  
+                             <?php if($user == null): ?>
+                               <a itemprop="url" href="#" title="" class="popup1">Sign In</a>
+                             <?php else: ?>
+                             &nbsp;Hi <?php echo e($user->fname); ?>, <a itemprop="url" href="<?php echo e(url('dashboard')); ?>" title="" class="">Dashboard</a> | <a itemprop="url" href="<?php echo e(url('bye')); ?>" title="" class="">Sign out</a>
+                             <?php endif; ?>
                         </div>
                     </div>
                 </div>
@@ -70,9 +84,7 @@
                       <li><a itemprop="url" href="<?php echo e(url('/')); ?>" title="">Home</a></li>
                       <li class="menu-item-has-children"><a itemprop="url" href="#" title="">Know More</a>
                             <ul>
-                                <li><a itemprop="url" href="<?php echo e(url('about')); ?>" title="">About</a></li>
-                                <li><a itemprop="url" href="<?php echo e(url('projects')); ?>" title="">Projects</a></li>
-                                <li><a itemprop="url" href="<?php echo e(url('packages')); ?>" title="">Packages</a></li>
+                                <li><a itemprop="url" href="<?php echo e(url('about')); ?>" title="">About Us</a></li>
                                 <li><a itemprop="url" href="<?php echo e(url('why-us')); ?>" title="">What Makes Us Different</a></li>
                             </ul>
                       </li>
@@ -134,9 +146,7 @@
                          <li><a itemprop="url" href="<?php echo e(url('/')); ?>" title="">Home</a></li>
                          <li class="menu-item-has-children"><a itemprop="url" href="#" title=""></a>
                             <ul>
-                                <li><a itemprop="url" href="<?php echo e(url('about')); ?>" title="">About</a></li>
-                                <li><a itemprop="url" href="<?php echo e(url('projects')); ?>" title="">Projects</a></li>
-                                <li><a itemprop="url" href="<?php echo e(url('packages')); ?>" title="">Packages</a></li>
+                                <li><a itemprop="url" href="<?php echo e(url('about')); ?>" title="">About Us</a></li>
                                 <li><a itemprop="url" href="<?php echo e(url('why-us')); ?>" title="">What Makes Us Different</a></li>
                             </ul>
                          </li>
@@ -148,6 +158,7 @@
             </div>
         </div><!--Responsive header-->
 
+        <?php if($user == null): ?>
         <div id="signup-popup">
             <div class="region2"  id="signup">
                 <div class="modal-dialog1">
@@ -156,60 +167,66 @@
                             <div class="signup-form">
                                 <button type="submit"><img src="images/close1.png" alt="" /></button>
                                 <div class="row">
-                                    <div class="col-md-6">
+                                    <div class="col-md-12" id="signin-div">
                                         <div class="sign-in banner-detail1">
                                             <div class="heading2">
-                                                <span>Globally Incubate</span>
+                                                <span>DGS Couriers</span>
                                                 <h3>Sign In Now</h3>
                                             </div>
-                                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Numquam modi consequuntur earum illo sunt.</p>
-                                            <form>
+                                            <p>Acess your account (staff and admin)</p>
+                                            <form id="login-form" method="post" action="<?php echo e(url('login')); ?>">
+                                                <?php echo csrf_field(); ?>
+
                                                 <label>
-                                                    <input type="text" class="text-field" placeholder="User Name">
+                                                    <i class="fa fa-user"></i>
+                                                    <input type="text" id="login-email" name="email" class="text-field" placeholder="Email address">
                                                 </label>
                                                 <label>
                                                     <i class="fa fa-anchor"></i>
-                                                    <input type="password" class="text-field" placeholder="Password:">
+                                                    <input type="password" id="login-password" name="password" class="text-field" placeholder="Password">
                                                 </label>
                                                 <div class="terms-services">
                                                     <span>
-                                                        <input tabindex="23" type="checkbox" id="field15" />
+                                                        <input tabindex="23" type="checkbox" id="field15" checked />
                                                         <label for="field15">Remember My Password</label>
                                                     </span>
                                                 </div>
+                                                
                                                 <ul>
-                                                    <li><a href="#" title="" class="theme-btn" itemprop="url"><i class="fa fa-paper-plane"></i>SIGN IN NOW</a></li>
-                                                    <li><a href="#" title="" itemprop="url">Forgot Password</a></li>
+                                                    <li><a href="#" id="login-btn" title="" class="theme-btn" itemprop="url"><i class="fa fa-paper-plane"></i>SIGN IN</a></li>
+                                                    <li><a href="#" title="" itemprop="url"></a></li>
                                                 </ul>
+                                                
                                             </form>
                                         </div><!-- Sign In -->
                                     </div>
-
-                                    <div class="col-md-6">
+                                    <div class="col-md-12" id="signup-div">
                                         <div class="sign-in banner-detail1 si">
                                             <div class="heading2">
-                                                <span>Globally Incubate</span>
-                                                <h3>Register Now</h3>
+                                                <span>DGS Couriers</span>
+                                                <h3>Sign Up</h3>
                                             </div>
-                                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Numquam modi consequuntur maxime voluptates.</p>
-                                            <form>
+                                            <p>Create a new account (for staff and admin)</p>
+                                            <form id="signup-form" method="post" action="<?php echo e(url('signup')); ?>">
+                                                <?php echo csrf_field(); ?>
+
                                                 <label>
-                                                    <input type="text" class="text-field" placeholder="First Name">
+                                                    <input type="text" class="text-field" id="signup-fname" name="fname" placeholder="First Name" required>
                                                 </label>
                                                 <label>
-                                                    <input type="text" class="text-field" placeholder="Last Name">
+                                                    <input type="text" class="text-field" id="signup-lname" name="lname" placeholder="Last Name" required>
                                                 </label>
                                                 <label>
                                                     <i class="fa fa-envelope"></i>
-                                                    <input type="email" class="text-field" placeholder="Email Address">
+                                                    <input type="email" class="text-field" id="signup-email" name="email" placeholder="Email Address" required>
                                                 </label>
                                                 <label>
                                                     <i class="fa fa-anchor"></i>
-                                                    <input type="password" class="text-field" placeholder="New Password:">
+                                                    <input type="password" id="signup-password" name="password" class="text-field" placeholder="New Password:">
                                                 </label>
                                                 <label>
                                                     <i class="fa fa-anchor"></i>
-                                                    <input type="password" class="text-field" placeholder="Re-Type Password:">
+                                                    <input type="password" id="signup-password2" name="password_confirmation" class="text-field" placeholder="Re-Type Password:">
                                                 </label>
                                                 <div class="terms-services">
                                                     <span>
@@ -217,9 +234,9 @@
                                                         <label for="field16">I agree to the Unload <a href="#" title="">Terms of Service</a> and <a href="#" title="">Privacy Policy</a></label>
                                                     </span>
                                                 </div>
-                                                <a href="#" title="" class="theme-btn" itemprop="url"><i class="fa fa-paper-plane"></i>SIGN IN NOW</a>
+                                                <a href="#" id="signup-btn" title="" class="theme-btn" itemprop="url"><i class="fa fa-paper-plane"></i>SIGN UP</a>
                                             </form>
-                                        </div><!-- Sign In -->
+                                        </div><!-- Sign Up -->
                                     </div>
                                 </div>
                             </div><!-- Signup Form -->
@@ -228,6 +245,7 @@
                 </div>
             </div>
         </div><!-- Signup Popup -->
+        <?php endif; ?>
 
         <div id="calculate-form-popup">
             <div class="calculate-form-popup">
@@ -268,28 +286,7 @@
                 </div>
             </div>
         </div>
-		
-		 <!--------- Session notifications-------------->
-        	<?php
-               $pop = ""; $val = "";
-               
-               if(isset($signals))
-               {
-                  foreach($signals['okays'] as $key => $value)
-                  {
-                    if(session()->has($key))
-                    {
-                  	$pop = $key; $val = session()->get($key);
-                    }
-                 }
-              }
-              
-             ?> 
-
-                 <?php if($pop != "" && $val != ""): ?>
-                   <?php echo $__env->make('session-status',['pop' => $pop, 'val' => $val], \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
-                 <?php endif; ?>
-        	
+			
 					 
 		  <?php echo $__env->yieldContent('slider'); ?>
 		  
@@ -332,11 +329,8 @@
                                                 </div>
                                                 <div class="links-widget">
                                                     <ul>
-                                                        <li><a itemprop="url" href="about.html" title="">About Us</a></li>
-                                                        <li><a itemprop="url" href="services-detail.html" title="">Packaging and Storage</a></li>
-                                                        <li><a itemprop="url" href="events.html" title="">Company Events</a></li>
-                                                        <li><a itemprop="url" href="services-detail3.html" title="">Warehousing</a></li>
-                                                        <li><a itemprop="url" href="blog-grid-3column.html" title="">Company News</a></li>
+                                                        <li><a itemprop="url" href="<?php echo e(url('about')); ?>" title="">About Us</a></li>
+                                                        <li><a itemprop="url" href="<?php echo e(url('why-us')); ?>" title="">What Makes us Different</a></li>
                                                     </ul>
                                                 </div>
                                             </div><!-- Widget -->
@@ -349,11 +343,11 @@
                                                 </div>
                                                 <div class="links-widget">
                                                     <ul>
-                                                        <li><a itemprop="url" href="services-detail2.html" title="">Ground Transport</a></li>
-                                                        <li><a itemprop="url" href="services-detail6.html" title="">Cargo</a></li>
-                                                        <li><a itemprop="url" href="services-detail3.html" title="">Warehousing</a></li>
-                                                        <li><a itemprop="url" href="services-detail4.html" title="">Logistic Service</a></li>
-                                                        <li><a itemprop="url" href="services-detail.html" title="">Trucking Service</a></li>
+                                                        <li><a itemprop="url" href="<?php echo e($void); ?>" title="">Ground Transport</a></li>
+                                                        <li><a itemprop="url" href="<?php echo e($void); ?>" title="">Cargo</a></li>
+                                                        <li><a itemprop="url" href="<?php echo e($void); ?>" title="">Warehousing</a></li>
+                                                        <li><a itemprop="url" href="<?php echo e($void); ?>" title="">Logistic Service</a></li>
+                                                        <li><a itemprop="url" href="<?php echo e($void); ?>" title="">Trucking Service</a></li>
                                                     </ul>
                                                 </div>
                                             </div><!-- Widget -->
@@ -364,13 +358,13 @@
                                     <div class="widget blue1">
                                         <div class="heading2">
                                             <span>FAST AND SAFE</span>
-                                            <h3>NEWSLETTER SUBSCRIBE</h3>
+                                            <h3>NEWSLETTER</h3>
                                         </div>
                                         <div class="subscription-form">
-                                            <p itemprop="description">Vestibulum id ligula porta felis euismod sem per. Aenean eu leo quam.</p>
+                                            <p itemprop="description">Subscribe to our newsletter for the latest updates</p>
                                             <form>
                                                 <input type="text" placeholder="Enter Your Email Address" />
-                                                <a title="" href="#" class="theme-btn" data-toggle="modal" data-target="#submission-message"><i class="fa fa-paper-plane"></i>SUBMIT NOW</a>
+                                                <a title="" href="#" class="theme-btn" data-toggle="modal" data-target="#submission-message"><i class="fa fa-paper-plane"></i>SUBMIT</a>
                                             </form>
                                         </div>
                                     </div>
@@ -384,15 +378,13 @@
                 <div class="container">
                     <div class="row">
                         <div class="col-md-6 column">
-                            <span>&copy; 2015 <a itemprop="url" title="" href="<?php echo e(url('/')); ?>">Unload</a> - All Rights Reserved - Made By Webinane</span>
+                            <span>&copy; <?php echo e(date("Y")); ?> <a itemprop="url" title="" href="<?php echo e(url('/')); ?>">DSG Couriers</a> - All Rights Reserved</span>
                         </div>
                         <div class="col-md-6 column">
                             <ul>
                                 <li><a itemprop="url" href="<?php echo e(url('/')); ?>" title="">HOME</a></li>
-                                <li><a itemprop="url" href="services.html" title="">SERVICES</a></li>
-                                <li><a itemprop="url" href="packages.html" title="">OUR RATES</a></li>
-                                <li><a itemprop="url" href="contact.html" title="">CONTACT</a></li>
-                                <li><a itemprop="url" href="about.html" title="">ABOUT US</a></li>
+                                <li><a itemprop="url" href="<?php echo e(url('about')); ?>" title="">ABOUT US</a></li>
+                                <li><a itemprop="url" href="<?php echo e(url('contact')); ?>" title="">CONTACT US</a></li>
                             </ul>
                         </div>
                     </div>
@@ -421,7 +413,7 @@
 <!-- Script -->
 <script type="text/javascript" src="js/modernizr-2.0.6.js"></script><!-- Modernizr -->
 <script type="text/javascript" src="js/jquery-2.2.2.js"></script><!-- jQuery -->
-<script type="text/javascript" src="js/bootstrap.min.js"></script><!-- Bootstrap -->
+<script type="text/javascript" src="js/bootstrap.bundle.min.js"></script><!-- Bootstrap -->
 <script type="text/javascript" src="js/scrolltopcontrol.js"></script><!-- Scroll To Top -->
 <script type="text/javascript" src="js/scroll-up-bar.js"></script><!-- Scroll Up Bar -->
 <script type="text/javascript" src="js/jquery.scrolly.js"></script><!-- Scrolly -->
@@ -442,6 +434,49 @@
 <script src="js/script.js"></script>
 <script src="js/mmm.js?ver=<?php echo e(rand(12454494,2237347438)); ?>"></script>
 <script src="js/helpers.js?ver=<?php echo e(rand(12454494,2237347438)); ?>"></script>
+<!--SweetAlert JS--> 
+<script src="lib/sweet-alert/sweetalert2.js"></script>
+
+<!--Datatables JS--> 
+<script src="lib/datatables/datatables.min.js"></script>
+
+<?php echo $__env->yieldContent('scripts'); ?>
+
+ <!--------- Session notifications-------------->
+ <?php
+               $pop = ""; $val = "";
+               
+               if(isset($signals))
+               {
+                  foreach($signals['okays'] as $key => $value)
+                  {
+                    if(session()->has($key))
+                    {
+                  	$pop = $key; $val = session()->get($key);
+                    }
+                 }
+              }
+              
+             ?> 
+
+                 <?php if($pop != "" && $val != ""): ?>
+                   <?php echo $__env->make('session-status',['pop' => $pop, 'val' => $val], \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+                 <?php endif; ?>
+
+<?php if($user == null): ?>
+<!--------- Plugins: DO NOT EDIT ------>
+<?php
+foreach($plugins as $p)
+{
+?>
+<?php echo $p['value']; ?>
+
+<?php
+}
+?>
+<!------------------------------------->
+<?php endif; ?>
+
 <script>
     $(document).ready(function () {
         "use strict";
@@ -508,68 +543,7 @@
         });
     });
 
-    function initialize() {
-        var myLatlng = new google.maps.LatLng(51.5015588, -0.1276913);
-        var mapOptions = {
-            zoom: 14,
-            disableDefaultUI: true,
-            scrollwheel: false,
-            center: myLatlng
-        }
-        var map = new google.maps.Map(document.getElementById('google_map'), mapOptions);
-
-        var image = 'images/icon.png';
-        var myLatLng = new google.maps.LatLng(51.5015588, -0.1276913);
-        var beachMarker = new google.maps.Marker({
-            position: myLatLng,
-            map: map,
-            icon: image
-        });
-
-    }
-    google.maps.event.addDomListener(window, 'load', initialize);
-
-    function initialize2() {
-        var myLatlng = new google.maps.LatLng(51.5015588, -0.1276913);
-        var mapOptions = {
-            zoom: 14,
-            disableDefaultUI: true,
-            scrollwheel: false,
-            center: myLatlng
-        }
-        var map = new google.maps.Map(document.getElementById('google_map2'), mapOptions);
-
-        var image = 'images/icon.png';
-        var myLatLng = new google.maps.LatLng(51.5015588, -0.1276913);
-        var beachMarker = new google.maps.Marker({
-            position: myLatLng,
-            map: map,
-            icon: image
-        });
-
-    }
-    google.maps.event.addDomListener(window, 'load', initialize2);
-
-    function initialize3() {
-        var myLatlng = new google.maps.LatLng(51.5015588, -0.1276913);
-        var mapOptions = {
-            zoom: 14,
-            disableDefaultUI: true,
-            scrollwheel: false,
-            center: myLatlng
-        }
-        var map = new google.maps.Map(document.getElementById('google_map3'), mapOptions);
-
-        var image = 'images/icon.png';
-        var myLatLng = new google.maps.LatLng(51.5015588, -0.1276913);
-        var beachMarker = new google.maps.Marker({
-            position: myLatLng,
-            map: map,
-            icon: image
-        });
-
-    }
-    google.maps.event.addDomListener(window, 'load', initialize3);
+    
 
 </script>
 </body>

@@ -10,7 +10,7 @@ $void = 'javascript:void(0)';
 if($valid)
 {
 ?>
- <?php echo $__env->make('tracking-found',['t' => $t], \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+ <?php echo $__env->make('tracking-found',['result' => $result], \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
 <?php
 }
 

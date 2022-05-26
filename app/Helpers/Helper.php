@@ -35,12 +35,15 @@ class Helper implements HelperContract
                      "signup-status" => "Account created successfully!",
                      "update-profile-status" => "Profile updated!",
                      "new-tracking-status" => "Tracking added!",
+                     "tracking-status" => "Tracking updated!",
+                     "remove-tracking-status" => "Tracking removed!",
                      "contact-status" => "Message sent! Our customer service representatives will get back to you shortly.",
                      ],
                      'errors'=> ["login-status-error" => "There was a problem signing in, please contact support.",
 					 "signup-status-error" => "There was a problem signing in, please contact support.",
 					 "update-status-error" => "There was a problem updating the account, please contact support.",
 					 "contact-status-error" => "There was a problem sending your message, please contact support.",
+                     "tracking-status-error" => "Tracking info does not exist!",
                     ]
                    ];
 
@@ -203,7 +206,73 @@ $subject = $data['subject'];
                         }                                    
                }                                 
                   return $ret;                               
-           }	
+           }
+           
+           function createPlugin($data)
+           {
+               $ret = Plugins::create([
+                   'name' => $data['name'],
+                   'value' => $data['value'],
+                   'status' => $data['status']
+               ]);
+
+               return $ret;
+           }
+
+           function getPlugins()
+           {
+               $ret = [];
+               $plugins = Plugins::where('id','>','0')->get();
+
+               if($plugins != null)
+               {
+                  foreach($plugins as $p)
+                  {
+                      $temp = $this->getPlugin($p->id);
+                      array_push($ret,$temp);
+                  }
+               }
+
+               return $ret;
+           }
+
+           function getPlugin($id)
+           {
+               $ret = [];
+               $p = Plugins::where('id',$id)->first();
+
+               if($p != null)
+               {
+                   $ret['id'] = $p->id;
+                   $ret['name'] = $p->name;
+                   $ret['value'] = $p->value;
+                   $ret['status'] = $p->status;
+               }
+
+               return $ret;
+           }
+
+           function updatePlugin($data)
+           {
+            $ret = [];
+            $p = Plugins::where('id',$data['id'])->first();
+            
+            if($p != null)
+            {
+                $p->update([
+                    'name' => $data['name'],
+                    'value' => $data['value'],
+                    'status' => $data['status']
+                ]);
+            }
+           }
+
+           function removePlugin($id)
+           {
+               $p = Plugins::where('id',$id)->first();
+
+               if($p != null) $p->delete();
+           }
           
            function hasKey($arr,$key) 
            {
@@ -351,9 +420,9 @@ $subject = $data['subject'];
                                                       'bmode' => $data['bmode'], 
                                                       'freight' => $data['freight'], 
                                                       'mode' => $data['mode'], 
-                                                      'desc' => $data['desc'], 
+                                                      'description' => $data['description'], 
 													  'dest' => $data['dest'],
-                                                      'pickup_at' => Carbon::parse($data['pickup_at']), 
+                                                      'pickup_at' => $data['pickup_at'], 
                                                       'status' => $data['status'], 
                                                       ]);
 			}
@@ -366,10 +435,28 @@ $subject = $data['subject'];
                                                       'bmode' => $data['bmode'], 
                                                       'freight' => $data['freight'], 
                                                       'mode' => $data['mode'], 
-                                                      'desc' => $data['desc'], 
-													  'pickup_at' => Carbon::parse($data['pickup_at']),
+                                                      'description' => $data['description'], 
+													  'pickup_at' => $data['pickup_at'],
                                                       'status' => $data['status'], 
                                                       ]);
+
+              $shipper = Shippers::where('tnum',$data['tnum'])->first();
+              $receiver = Receivers::where('tnum',$data['tnum'])->first();
+
+              if($shipper != null && $receiver != null)
+              {
+                  $shipper->update([
+                      'name' => $data['sname'],
+                      'phone' => $data['sphone'],
+                      'address' => $data['sadd']
+                  ]);
+
+                  $receiver->update([
+                    'name' => $data['rname'],
+                    'phone' => $data['rphone'],
+                    'address' => $data['radd']
+                ]);
+              }
 			}                                         
                 return $ret;
            }
@@ -417,7 +504,7 @@ $subject = $data['subject'];
                 return $ret;
            }
 		   
-		   function getTracking($tnum)
+		   function getTracking($tnum, $params = [])
            {
            	$ret = [];
                $t = Trackings::where('tnum',$tnum)->first();
@@ -433,41 +520,41 @@ $subject = $data['subject'];
                             $temp['bmode'] = $t->bmode; 
                             $temp['freight'] = $t->freight; 
                             $temp['mode'] = $t->mode; 
-                            $temp['desc'] = $t->desc; 
+                            $temp['description'] = $t->description; 
                             $temp['dest'] = $t->dest; 
-							$temp['pickup_at'] = Carbon::parse($t->pickup_at)->format("jS F, Y");
-                   	     $temp['status'] = $t->status; 
+							if(isset($params['rawDate']) && $params['rawDate'])
+                            {
+                                $temp['pickup_at'] = $t->pickup_at;
+                            }
+                            else
+                            {
+                                $temp['pickup_at'] = Carbon::createFromFormat('d/m/Y',$t->pickup_at)->format("jS F, Y");
+                            }
+                            $temp['status'] = $t->status; 
                          $temp['date'] = $t->created_at->format("jS F, Y"); 
                          $temp['last_updated'] = $t->updated_at->format("jS F, Y");
+
+                         if(isset($params['mode']) && $params['mode'] == "all")
+                         {
+                             $temp['shipper'] = $this->getShipper($tnum);
+                             $temp['receiver'] = $this->getReceiver($tnum);
+                         }
                        $ret = $temp; 
                }                          
                                                       
                 return $ret;
            }	
 
-           function getTrackings()
+           function getTrackings($params = [])
            {
            	   $ret = [];
-				   $trackings =  Trackings::where('id','>','0')->get();
+				   $trackings =  Trackings::where('id','>','0')->latest()->get();
 				   
 				   if($trackings != null)
 				   {
 					  foreach($trackings as $t)
 					  {
-                   	     $temp['id'] = $t->id; 
-                   	     $temp['tnum'] = $t->tnum; 
-                   	     $temp['stype'] = $t->stype; 
-                            $temp['weight'] = $t->weight; 
-                            $temp['origin'] = $t->origin; 
-                            $temp['bmode'] = $t->bmode; 
-                            $temp['freight'] = $t->freight; 
-                            $temp['mode'] = $t->mode; 
-                            $temp['desc'] = $t->desc; 
-                            $temp['dest'] = $t->dest; 
-                            $temp['pickup_at'] = Carbon::parse($t->pickup_at)->format("jS F, Y"); 
-                   	     $temp['status'] = $t->status; 
-                         $temp['date'] = $t->created_at->format("jS F, Y h:i A"); 
-                         $temp['last_updated'] = $t->updated_at->format("jS F, Y h:i A");
+                   	     $temp = $this->getTracking($t->tnum, $params);
                          array_push($ret,$temp); 
 					  }
                     }                          
@@ -480,7 +567,7 @@ $subject = $data['subject'];
            {
            	$ret = [];
  
-              $trackings =  TrackingHistory::where('tnum',$tnum)->get();
+              $trackings =  TrackingHistory::where('tnum',$tnum)->latest()->get();
 				   
 				   if($trackings != null)
 				   {
@@ -549,8 +636,41 @@ $subject = $data['subject'];
 			 $ret['shipper'] = $this->getShipper($tnum);
 			 $ret['receiver'] = $this->getReceiver($tnum);
 			 $ret['history'] = $this->getTrackingHistory($tnum);
-			   return $ret;
-		   }		   
+             return $ret;
+		   }		
+           
+           function getDashboardStats()
+           {
+               $ret = []; $temp = [];
+               $ret['users'] = User::where('status','ok')->count();
+               $ret['trackings'] = Trackings::where('id','>','0')->count();
+               $ret['plugins'] = Plugins::where('status','active')->count();
+
+               $topTrackings = Trackings::where('id','>','0')->latest()->paginate(5);
+               foreach($topTrackings as $tt)
+               {
+                   $temp2 = $this->getTracking($tt->tnum,['mode' => "all"]);
+                   array_push($temp,$temp2);
+               }
+               $ret['topTrackings'] = $temp;
+
+               return $ret;
+           }
+
+           function removeTracking($data)
+           {
+               $tnum = $data['tnum'];
+               $t = Trackings::where('tnum',$tnum)->first();
+
+               if($t != null)
+               {
+                   Shippers::where('tnum',$tnum)->delete();
+                   Receivers::where('tnum',$tnum)->delete();
+                   TrackingHistory::where('tnum',$tnum)->delete();
+
+                   $t->delete();
+               }
+           }
            
            
 }

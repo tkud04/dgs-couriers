@@ -21,9 +21,9 @@ $void = 'javascript:void(0)';
 
                         <div class="ls-slide" style="font-family:roboto; font-size:250px; color:#ebe814; font-weight:900; top:180px; left:500px;" data-ls="offsetyout:top; offsetyin:bottom; durationin:1000; delayin:1000; easingin:easeOutBack; fadein:false; easingout:easeInBack; fadeout:false;">O</div>
 
-                        <div class="ls-slide" style="line-height:28px; font-family:lato; font-size:15px; color:#ffffff; top:445px; left:100px;" data-ls="offsetxout:left; offsetxin:right; durationin:1300; delayin:1200; easingin:easeOutBack; fadein:false; easingout:easeInBack; fadeout:false;">Duis sed odio sit amet nibh vulputate cursus a sit amet mauris <br /> ipsum velit. Nam nec tellus aodio tincidunt auctor.</div>
+                        <div class="ls-slide" style="line-height:28px; font-family:lato; font-size:15px; color:#ffffff; top:445px; left:100px;" data-ls="offsetxout:left; offsetxin:right; durationin:1300; delayin:1200; easingin:easeOutBack; fadein:false; easingout:easeInBack; fadeout:false;">We are a multinational conglomerate holding company<br/> focused on transportation, e-commerce and services</div>
 
-                        <a href="book-now.html" itemprop="url" title="" class="ls-slide slide-icon" style="padding:16px 45px; background:#ffb400; color:#ffffff; font-size:12px; top:539px; left:100px;" data-ls="offsetxout:left; offsetyin:bottom; durationin:1500; delayin:1300; easingin:easeOutBack; fadein:false; easingout:easeInBack; fadeout:false;">ORDER NOW</a>
+                        <a href="<?php echo e(url('about')); ?>" itemprop="url" title="" class="ls-slide slide-icon" style="padding:16px 45px; background:#ffb400; color:#ffffff; font-size:12px; top:539px; left:100px;" data-ls="offsetxout:left; offsetyin:bottom; durationin:1500; delayin:1300; easingin:easeOutBack; fadein:false; easingout:easeInBack; fadeout:false;">ABOUT US</a>
 
                         <img src="images/resource/slide-model.png" alt="" itemprop="image" class="ls-slide" style="top:0; left:540px;" data-ls="offsetyout:top; offsetyin:bottom; durationin:2000; delayin:1500; easingin:easeOutBack; fadein:false; easingout:easeInBack; fadeout:false;" />
                     </div><!-- Slide 1 -->
@@ -38,7 +38,7 @@ $void = 'javascript:void(0)';
 
                         <span class="ls-slide" style="top:390px; left:50%; font-family:roboto; color:#ffffff; border-radius:3px; padding:12px 40px; background:rgba(31,66,93,.81); font-size:20px; font-weight:200;" data-ls="offsetyout:bottom; offsetyin:top; durationin:1300; delayin:500; easingin:easeOutBack; fadein:false; easingout:easeInBack; fadeout:false;">Logistics &amp; Transportation</span>
 
-                        <div class="ls-slide" style="top:467px; left:50%; line-height:28px; font-family:lato; font-size:15px; color:#ffffff; text-align:center;" data-ls="offsetxout:left; offsetxin:right; durationin:1500; delayin:700; easingin:easeOutBack; fadein:false; easingout:easeInBack; fadeout:false;">Duis sed odio sit amet nibh vulputate cursus a sit amet mauris. Morbi accumsan <br /> ipsum velit. Nam nec tellus aodio tincidunt auctor a ornare odio.</div>
+                        <div class="ls-slide" style="top:467px; left:50%; line-height:28px; font-family:lato; font-size:15px; color:#ffffff; text-align:center;" data-ls="offsetxout:left; offsetxin:right; durationin:1500; delayin:700; easingin:easeOutBack; fadein:false; easingout:easeInBack; fadeout:false;">We also provide businesses and customers worldwide with a broad<br/> portfolio of transportation, e-commerce, and business services.</div>
                     </div><!-- Slide 2 -->
 
                     <div class="ls-slide" data-ls="transition2d:30; timeshift:-1000; slidedelay: 6000;">
@@ -50,9 +50,9 @@ $void = 'javascript:void(0)';
 
                         <strong class="ls-slide" style="top:345px; left:0; letter-spacing:3px; font-family:raleway; color:#ffffff; text-transform:uppercase; border-radius:3px; padding:14px 25px; background:#1f425d; font-size:13px;" data-ls="offsetyout:bottom; offsetyin:top; durationin:1300; delayin:500; easingin:easeOutBack; fadein:false; easingout:easeInBack; fadeout:false;">Fast &amp; Secure Delivery</strong>
 
-                        <div class="ls-slide" style="top:425px; left:0;line-height:28px; font-family:lato; font-size:15px; color:#ffffff;" data-ls="offsetxout:left; offsetxin:right; durationin:1500; delayin:700; easingin:easeOutBack; fadein:false; easingout:easeInBack; fadeout:false;">Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean <br /> nascetur ridiculus mus dolor sit amet, consectetu.</div>
+                        <div class="ls-slide" style="top:425px; left:0;line-height:28px; font-family:lato; font-size:15px; color:#ffffff;" data-ls="offsetxout:left; offsetxin:right; durationin:1500; delayin:700; easingin:easeOutBack; fadein:false; easingout:easeInBack; fadeout:false;">We have a broad portfolio of products and solutions to meet your logistics requirements <br/>everything from simple shipping and transportation to transformative solutions that span the supply chain.</div>
 
-                        <a href="services-calculator.html" itemprop="url" title="" class="ls-slide slide-btn slide-icon" style="top:515px; left:0; text-transform:uppercase; padding:16px 40px; color:#ffb400; border:2px solid #ffb400; font-family:raleway; font-size:13px; font-weight:700;" data-ls="offsetxout:left; offsetyin:bottom; durationin:1700; delayin:1000; easingin:easeOutBack; fadein:false; easingout:easeInBack; fadeout:false;">CALCULATE PACKAGE</a>
+                        <a href="<?php echo e(url('about')); ?>" itemprop="url" title="" class="ls-slide slide-btn slide-icon" style="top:515px; left:0; text-transform:uppercase; padding:16px 40px; color:#ffb400; border:2px solid #ffb400; font-family:raleway; font-size:13px; font-weight:700;" data-ls="offsetxout:left; offsetyin:bottom; durationin:1700; delayin:1000; easingin:easeOutBack; fadein:false; easingout:easeInBack; fadeout:false;">CALCULATE PACKAGE</a>
                     </div><!-- Slide 3 -->
                 </div>
             </div>
@@ -70,7 +70,7 @@ $void = 'javascript:void(0)';
                                         <img src="images/resource/service1.jpg" alt="" />
                                         <div class="service-detail">
                                             <i><img itemprop="image" src="images/resource/icon1.png" alt="" /></i>
-                                            <span>M2 Warehouse</span>
+                                            <span>DGS Couriers</span>
                                             <h3>Door To Door</h3>
                                             <h5>SHIPPING</h5>
                                             <a class="theme-btn" itemprop="url" href="services-detail.html" title=""><i class="fa fa-paper-plane"></i>Get A Rate</a>
@@ -82,7 +82,7 @@ $void = 'javascript:void(0)';
                                         <img src="images/resource/service2.jpg" alt="" />
                                         <div class="service-detail">
                                             <i><img itemprop="image" src="images/resource/icon2.png" alt="" /></i>
-                                            <span>M2 Warehouse</span>
+                                            <span>DGS Couriers</span>
                                             <h3>Ground</h3>
                                             <h5>SHIPPING</h5>
                                             <a class="theme-btn" itemprop="url" href="services-detail.html" title=""><i class="fa fa-paper-plane"></i>Get A Rate</a>
@@ -94,7 +94,7 @@ $void = 'javascript:void(0)';
                                         <img src="images/resource/service3.jpg" alt="" />
                                         <div class="service-detail">
                                             <i><img itemprop="image" src="images/resource/icon3.png" alt="" /></i>
-                                            <span>M2 Warehouse</span>
+                                            <span>DGS Couriers</span>
                                             <h3>Worldwide</h3>
                                             <h5>DELIVERY</h5>
                                             <a class="theme-btn" itemprop="url" href="services-detail.html" title=""><i class="fa fa-paper-plane"></i>Get A Rate</a>
@@ -106,7 +106,7 @@ $void = 'javascript:void(0)';
                                         <img src="images/resource/service4.jpg" alt="" />
                                         <div class="service-detail">
                                             <i><img itemprop="image" src="images/resource/icon4.png" alt="" /></i>
-                                            <span>M2 Warehouse</span>
+                                            <span>DGS Couriers</span>
                                             <h3>Cargo Air</h3>
                                             <h5>SHIPPING</h5>
                                             <a class="theme-btn" itemprop="url" href="services-detail.html" title=""><i class="fa fa-paper-plane"></i>Get A Rate</a>
@@ -132,7 +132,7 @@ $void = 'javascript:void(0)';
                                             <strong>SAFE &amp; AFFORDABLE CARGO</strong>
                                             <h2>ABOUT CARGO SHIPMENT</h2>
                                         </div>
-                                        <p itemprop="description">Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nasce culus mus. Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Cum sociis natoq atibus et magnis dis parturient montes, nascetur ridiculus mus.</p>
+                                        <p itemprop="description">We are a multinational conglomerate holding company<br/> focused on transportation, e-commerce and services</p>
                                         <div class="services1">
                                             <div class="row">
                                                 <div class="col-md-6">
@@ -140,7 +140,7 @@ $void = 'javascript:void(0)';
                                                         <div class="service-box1">
                                                             <img src="images/resource/77.png" alt="" />
                                                             <h5 class="counter">2257</h5>
-                                                            <span>WEB DEVELOPMENT</span>
+                                                            <span>TRUCK DELIVERIES</span>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -150,13 +150,13 @@ $void = 'javascript:void(0)';
                                                         <div class="service-box1">
                                                             <img src="images/resource/88.png" alt="" />
                                                             <h5 class="counter">6919</h5>
-                                                            <span>PHOTOGRAPHY</span>
+                                                            <span>CARGO DELIVERIES</span>
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
-                                        <a class="theme-btn dark" href="about.html" title=""><i class="fa fa-paper-plane"></i>  about unload</a>
+                                        <a class="theme-btn dark" href="<?php echo e(url('about')); ?>" title=""><i class="fa fa-paper-plane"></i>  about unload</a>
                                     </div>
                                 </div>
                                 <div class="col-md-6">

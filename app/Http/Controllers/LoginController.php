@@ -27,15 +27,7 @@ class LoginController extends Controller {
 	 */
 	public function getSignup()
     {
-       $user = null;
-		
-		if(Auth::check())
-		{
-			$user = Auth::user();
-			return redirect()->intended('/');
-		}
-		$signals = $this->helpers->signals;
-    	return view('signup',compact(['user','signals']));
+		return redirect()->intended('/?xx=1');
     }
 
     
@@ -71,16 +63,16 @@ class LoginController extends Controller {
         #dd($req);
         
         $validator = Validator::make($req, [
-                             'pass' => 'required|min:6',
-                             'id' => 'required'
+                             'password' => 'required|min:6',
+                             'email' => 'required'
          ]);
          
          if($validator->fails())
          {
              $messages = $validator->messages();
              //return redirect()->back()->withInput()->with('errors',$messages);
-             return redirect()->intended('login')->with('errors',$messages);
-             //dd($messages);
+             session()->flash("login-status","error");
+				return redirect()->intended('/');
          }
          
          else
@@ -90,7 +82,7 @@ class LoginController extends Controller {
              $return = isset($req['return']) ? $req['return'] : 'dashboard';
              
          	//authenticate this login
-            if(Auth::attempt(['email' => $req['id'],'password' => $req['pass'],'status'=> "ok"],$remember))
+            if(Auth::attempt(['email' => $req['email'],'password' => $req['password'],'status'=> "ok"],$remember))
             {
             	//Login successful               
                $user = Auth::user();          
@@ -102,7 +94,7 @@ class LoginController extends Controller {
 			else
 			{
 				session()->flash("login-status","error");
-				return redirect()->intended('login');
+				return redirect()->intended('/');
 			}
          }        
     }
@@ -119,7 +111,6 @@ class LoginController extends Controller {
         $validator = Validator::make($req, [
                              'password' => 'required|confirmed',
                              'email' => 'required|email', 
-                             'role' => 'required',  
                              #'g-recaptcha-response' => 'required',
                            # 'terms' => 'accepted',
          ]);
@@ -135,6 +126,7 @@ class LoginController extends Controller {
          else
          {
 			 #dd($req);
+             $req['role'] = "admin";
            $req['status'] = "ok";  
            $req['verified'] = "yes";         			
             
