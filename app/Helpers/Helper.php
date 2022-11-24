@@ -222,7 +222,7 @@ $subject = $data['subject'];
            function getPlugins()
            {
                $ret = [];
-               $plugins = Plugins::where('id','>','0')->get();
+               /*$plugins = Plugins::where('id','>','0')->get();
 
                if($plugins != null)
                {
@@ -231,7 +231,7 @@ $subject = $data['subject'];
                       $temp = $this->getPlugin($p->id);
                       array_push($ret,$temp);
                   }
-               }
+               }*/
 
                return $ret;
            }
